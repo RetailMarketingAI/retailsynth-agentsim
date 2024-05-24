@@ -1,0 +1,16 @@
+hydra:
+  run:
+    dir: experiment_output
+  job:
+    chdir: True
+
+defaults:
+  - synthetic_data: test.yaml
+  - pyenv: 3c10.yaml
+  - optional cloud: aws.yaml
+  - optuna: linear_ucb.yaml
+  - _self_
+
+experiment:
+  storage: "cloud" # "local" or "cloud"
+  output_dir: ${pyenv.name}_${synthetic_data.name}_${synthetic_data.n_customer}customers_${synthetic_data.n_product}products/agent/${optuna.agent_type}/tuning_job # output directory

@@ -1,0 +1,10 @@
+# make sure to run `aws configure` to set up the AWS credentials in local terminal
+# or set up the AWS credentials using the following environment variables:
+
+session:
+  region_name: 'us-east-1'
+  # aws_access_key_id:  # not recommened, better to set up aws profile through `aws configure`
+  # aws_secret_access_key: 
+  # aws_session_token:
+
+bucket_name: 'retailsynth-dev'

@@ -1,0 +1,33 @@
+agent_type: dqn
+train_params:
+  batch_size: 20
+  n_train_epoch: 1000
+agent_params:
+  name: "DQN9f"
+  context_features: [
+    'avg_purchase_price', 
+    'avg_purchase_discount', 
+    'avg_purchase_probability', 
+    'avg_purchase_quantity', 
+    'previous_transaction', 
+    'avg_redeemed_discount', 
+    'product_price', 
+    'marketing_feature', 
+    'observed_customer_product_feature'
+  ]
+  optimizer:
+    _target_: tensorflow.keras.optimizers.legacy.Adam
+    learning_rate: 0.004643196981298455
+  q_network:
+    dense_layer_1:
+      _target_: tensorflow.keras.layers.Dense
+      units: 16
+      activation: "relu"
+    lstm_layer_1:
+      _target_: tensorflow.keras.layers.LSTM
+      units: 4
+      return_sequences: True
+      return_state: True
+  # add other parameters that tf-agents LinUCB agent supports
+  epsilon_greedy: 0.15519727130455402
+  gamma: 0.8792408738366871

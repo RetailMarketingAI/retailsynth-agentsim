@@ -1,0 +1,20 @@
+
+{
+    "jobDefinitionName": "my_job_definition",
+    "type": "container",
+    "containerProperties": {
+        "image": "730335247501.dkr.ecr.us-east-1.amazonaws.com/retailsynth:latest",
+        "command": ["echo", "test"],
+        "jobRoleArn": "arn:aws:iam::730335247501:role/ecsTaskExecutionRolewithBainPowerUserBoundary",
+        "executionRoleArn": "arn:aws:iam::730335247501:role/ecsTaskExecutionRolewithBainPowerUserBoundary",
+        "resourceRequirements": [
+            {"value": "8", "type": "VCPU"},
+            {"value": "80000", "type": "MEMORY"}
+        ],
+        "logConfiguration": {
+            "logDriver": "awslogs"
+        }
+    },
+    "platformCapabilities": ["EC2"],
+    "containerOrchestrationType": "ECS"
+}

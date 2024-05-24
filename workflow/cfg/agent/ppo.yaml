@@ -1,0 +1,28 @@
+agent_type: ppo
+train_params:
+  batch_size: 20
+  n_train_epoch: 1000
+agent_params:
+  name: "PPO9f"
+  context_features: [
+    'avg_purchase_price', 
+    'avg_purchase_discount', 
+    'avg_purchase_probability', 
+    'avg_purchase_quantity', 
+    'previous_transaction', 
+    'avg_redeemed_discount', 
+    'product_price', 
+    'marketing_feature', 
+    'observed_customer_product_feature'
+  ]
+  optimizer:
+    _target_: tensorflow.keras.optimizers.legacy.Adam
+    learning_rate: 0.006380757050779136
+  actor_net:
+    fc_layer_params: [32,8]
+  value_net:
+    fc_layer_params: [32,8]
+  importance_ratio_clipping: 0.7849416213439981
+  discount_factor: 0.8198518927547219
+  entropy_regularization: 0.1012597119847905
+  num_epochs: 12

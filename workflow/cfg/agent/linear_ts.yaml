@@ -1,0 +1,20 @@
+agent_type: linear_ts
+train_params:
+  batch_size: 500
+  n_train_epoch: 2
+agent_params: 
+  name: "LinTS9f"
+  context_features: [
+    'avg_purchase_price', 
+    'avg_purchase_discount', 
+    'avg_purchase_probability', 
+    'avg_purchase_quantity', 
+    'previous_transaction', 
+    'avg_redeemed_discount', 
+    'product_price', 
+    'marketing_feature', 
+    'observed_customer_product_feature'
+  ]
+  alpha: 0.8483317906758103 # (float) positive scalar. This is the exploration parameter that multiplies the confidence intervals.
+  gamma: 0.10880708476170549 # a float forgetting factor in [0.0, 1.0]. When set to 1.0, the algorithm does not forget.
+  add_bias: True # (bool) whether to add bias to the model.

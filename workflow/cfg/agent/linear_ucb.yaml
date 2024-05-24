@@ -1,0 +1,21 @@
+agent_type: linear_ucb
+train_params:
+  batch_size: 500
+  n_train_epoch: 2
+agent_params:
+  name: "LinUCB9f"
+  context_features: [
+    'avg_purchase_price', 
+    'avg_purchase_discount', 
+    'avg_purchase_probability', 
+    'avg_purchase_quantity', 
+    'previous_transaction', 
+    'avg_redeemed_discount', 
+    'product_price', 
+    'marketing_feature', 
+    'observed_customer_product_feature'
+  ]
+  # add other parameters that tf-agents LinUCB agent supports
+  alpha: 0.738665395877725
+  gamma: 0.8119218938166818
+  add_bias: True

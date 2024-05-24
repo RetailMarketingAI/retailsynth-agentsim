@@ -1,0 +1,46 @@
+hydra:
+  run:
+    dir: experiment_output
+  job:
+    chdir: True
+
+defaults:
+  - agent: linear_ucb.yaml
+  - synthetic_data: test.yaml
+  - pyenv: 3c10.yaml
+  - optional cloud: aws.yaml
+  - _self_
+  - override hydra/job_logging: custom.yaml
+
+step: "feature_selection"
+
+experiment:
+  experiment_id: "train-agent"
+  run_id: "0"
+  instance_id: "0"
+  instance_eval_id: "0"
+  storage: "cloud" # store to "local" directory or to "cloud" s3 bucket
+  output_dir: ${pyenv.name}_${synthetic_data.name}_${synthetic_data.n_customer}customers_${synthetic_data.n_product}products # output directory
+train:
+  # setup to run train-eval script
+  random_seed_range: 1e6
+  n_offline_data_step: 50 # number of time steps in one training epoch
+  offline_data_policy: 
+    type: random # fixed_arm or random
+    fixed_seed: False # whether extract 
+  callback:
+    _target_: keras.callbacks.EarlyStopping
+    monitor: "loss"
+    patience: 15
+    min_delta: 0
+  read_params_from_tuning_log: True
+  train_data_size: 1000
+eval:
+  n_eval_step: 20 # number of time steps in one evaluation epoch
+summary:
+  # config used to compute metrics
+  agents: ['LinUCB9f', 'LinTS9f', 'NeuralBoltzmann9f', 'DQN9f', 'PPO9f', 'FixedArm_0', 'random_agent']
+  n_customer_segment: 2
+  customer_retention_window_length: 3
+  feature_selection_sample_size: 100
+  summary_file_prefix: ''

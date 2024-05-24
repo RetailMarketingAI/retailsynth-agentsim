@@ -1,0 +1,19 @@
+version: 1
+disable_existing_loggers: false
+formatters:
+  simple:
+    format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+handlers:
+  file:
+    class: logging.FileHandler
+    level: INFO
+    formatter: simple
+    filename: job_logging.log
+    mode: a
+  console:
+    class: logging.StreamHandler
+    level: WARNING  
+    formatter: simple
+root:
+  level: INFO
+  handlers: [file, console]

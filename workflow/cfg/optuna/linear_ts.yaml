@@ -1,0 +1,50 @@
+agent_type: linear_ts
+study:
+  directions: ['maximize']
+  sampler:
+    _target_: optuna.samplers.TPESampler
+n_trial: 12 # number of different configurations to try
+n_job_in_parallel: 2 # number of different trials to run at the same time
+n_instance_per_trial: 3 # number of training jobs to run for each configuration
+n_eval_trajectories: 10 # number of evaluation trajectories to collect for each training job
+consider_past_trials: True # 
+sleep_time: 600 # seconds
+params:
+  'alpha':
+    type: 'float' # categorical or float or int
+    low: 0.1 # lower bound of the parameter range
+    high: 0.9 # upper bound of teh parameter range
+  'context_features':
+    type: 'categorical' # categorical or float or int
+    value: [[
+      'avg_purchase_price', 
+      'avg_purchase_quantity', 
+      'avg_purchase_probability', 
+      'avg_redeemed_discount', 
+      'avg_purchase_discount', 
+      'previous_transaction',
+      'product_price', 
+      'marketing_feature',
+      'observed_customer_product_feature',
+      ],
+    ] # list out all candidates of the categorical parameter
+  'gamma':
+    type: 'float' # categorical or float or int
+    low: 0.1
+    high: 0.9
+batch_job_train: # batch job setup for the training step
+  job_name: ${optuna.agent_type}_parameter_tuning
+  job_queue: "experiment_workflow"
+  job_definition: "parameter_tuning"
+  command: ["python", "workflow/optuna_job.py", "step=train", "synthetic_data=${synthetic_data.name}", "pyenv=${pyenv.name}"]
+  memory: '300000' # need to be string format
+  vcpus: '4' # need to be string format
+  timeout: 72000 # seconds
+batch_job_eval: # batch job setup for the evaluation step
+  job_name: ${optuna.agent_type}_parameter_tuning_eval
+  job_queue: "experiment_workflow"
+  job_definition: "parameter_tuning"
+  command: ["python", "workflow/optuna_job.py", "step=eval", "synthetic_data=${synthetic_data.name}", "pyenv=${pyenv.name}"]
+  memory: '10000' # need to be string format
+  vcpus: '2' # need to be string format
+  timeout: 72000 # seconds

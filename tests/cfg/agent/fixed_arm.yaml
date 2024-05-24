@@ -1,0 +1,7 @@
+agent_type: fixed_arm
+train_params:
+  batch_size: 1 # since fixed arm do not need training, this integer is only a placeholder.
+  n_train_epoch: 1 # since fixed arm do not need training, this integer is only a placeholder.
+agent_params: 
+  name: "FixedArm"
+  chosen_arm: 0

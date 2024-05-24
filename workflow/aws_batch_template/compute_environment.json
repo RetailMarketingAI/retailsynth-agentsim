@@ -1,0 +1,17 @@
+{
+    "computeEnvironmentName": "my_compute_environment",
+    "type": "MANAGED",
+    "state": "ENABLED",
+    "computeResources": {
+        "type": "EC2",
+        "allocationStrategy": "BEST_FIT_PROGRESSIVE",
+        "minvCpus": 0, 
+        "maxvCpus": 256, 
+        "desiredvCpus": 0,
+        "instanceTypes": ["optimal"],
+        "subnets": ["subnet-07b0b95f4890bd10e"],
+        "securityGroupIds": ["sg-09f892d93c6653e70"],
+        "instanceRole": "arn:aws:iam::730335247501:instance-profile/ecsTaskExecutionRolewithBainPowerUserBoundary"
+    },
+    "serviceRole": "arn:aws:iam::730335247501:role/batch-poweruser-boundary-incl"
+}

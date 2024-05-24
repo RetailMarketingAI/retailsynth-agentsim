@@ -1,0 +1,110 @@
+name: "no_marketing"
+n_customer: 100
+n_category: 30
+n_product: 2514
+category_product_count: [ 59,   5,   2,  63,  18, 145,  93,  61,  20,   3,  93,  93,   5,
+        89,  84,  76,  44, 135,  36,  28, 112,  87, 150, 132, 241, 178,
+        34, 301,  14, 113]
+store_util_marketing_feature_mode: "random"
+random_seed: 0
+random_seed_range: 100
+# coefficients to generate discount
+discount_depth_distribution:
+  _target_: numpyro.distributions.Beta
+  concentration1: 50 # alpha, as in the beta distribution
+  concentration0: 50 # beta, as in the beta distribution
+discount_state_a_01:
+  _target_: numpyro.distributions.Beta
+  concentration0: 60
+  concentration1: 40
+discount_state_a_11:
+  _target_: numpyro.distributions.Beta
+  concentration0: 60
+  concentration1: 40
+  # coefficients to generate coupon
+coupon_distribution: # set coupon to be zero
+  _target_: numpyro.distributions.Uniform
+  low: 0
+  high: 0
+coupon_redemption_rate: # set redemption rate to be one
+  _target_: numpyro.distributions.Uniform
+  low: 1
+  high: 1
+# coefficients to compute product price
+price_alpha_i0:
+  _target_: numpyro.distributions.TruncatedNormal
+  loc: 1.3
+  scale: 0.5
+  low: 0
+price_alpha_1:
+  _target_: numpyro.distributions.LogNormal
+  loc: 0.8
+  scale: 1.2
+lowest_price: 1
+
+# coefficients to compute product utility
+utility_beta_ui_z:
+  _target_: numpyro.distributions.LogNormal
+  loc: 1
+  scale: 0.4
+utility_beta_ui_x:
+  _target_: numpyro.distributions.LogNormal
+  loc: -1
+  scale: 1
+utility_beta_i_w:
+  _target_: numpyro.distributions.TruncatedNormal
+  loc: -3
+  scale: 2
+  high: 0
+utility_c: -1.4
+utility_beta_u_w:
+  _target_: numpyro.distributions.TruncatedNormal
+  loc: -3
+  scale: 1.5
+  high: 0
+utility_clip_percentile: 99.99
+utility_error_distribution:
+  _target_: numpyro.distributions.Gumbel
+  loc: 0
+  scale: 0.1
+
+# coefficients to compute category utility
+category_choice_gamma_0j_cate:
+  _target_: numpyro.distributions.Normal
+  loc: -5
+  scale: 0.5
+category_choice_gamma_1j_cate:
+  _target_: numpyro.distributions.TruncatedNormal
+  loc: 0.1
+  scale: 0.04
+  low: 0
+  high: 0.12
+
+# coefficients to compute store visit probability
+store_visit_theta_u:
+  _target_: numpyro.distributions.Uniform
+  low: 0.25
+  high: 0.45
+store_visit_gamma_0_store:
+  _target_: numpyro.distributions.Gumbel
+  loc: 4
+  scale: 0.1
+store_visit_gamma_1_store:
+  _target_: numpyro.distributions.TruncatedNormal
+  loc:  0.01
+  scale: 0.01
+  low: 0
+store_visit_gamma_2_store:
+  _target_: numpyro.distributions.Uniform
+  low: 5
+  high: 6
+
+# coefficients to compute product demand
+purchase_quantity_gamma_0i_prod:
+  _target_: numpyro.distributions.Gumbel
+  loc: -3
+  scale: 0.1
+purchase_quantity_gamma_1i_prod:
+  _target_: numpyro.distributions.LogNormal
+  loc: -4
+  scale: 0.1

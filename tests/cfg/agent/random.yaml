@@ -1,0 +1,5 @@
+agent_type: random
+train_params:
+  batch_size: 10
+  n_train_epoch: 1
+agent_params: null

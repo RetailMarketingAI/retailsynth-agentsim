@@ -1,0 +1,11 @@
+{
+    "jobQueueName": "my-job-queue",
+    "priority": 1,
+    "computeEnvironmentOrder": [
+        {
+            "order": 1,
+            "computeEnvironment": "arn:aws:batch:us-east-1:730335247501:compute-environment/my_compute_environment"
+        }
+    ],
+    "state": "ENABLED"
+}

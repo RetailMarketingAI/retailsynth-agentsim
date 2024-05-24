@@ -1,0 +1,7 @@
+_target_: retail_agent.envs.cb_retail_env.CBRetailEnv 
+action_spec_mode: "store-wide"
+max_steps: 150
+discount_factor: 0
+coupon_unit: 0.05
+n_coupon_levels: 3
+name: 3c10

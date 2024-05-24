@@ -1,0 +1,23 @@
+agent_type: neural_boltzmann
+train_params:
+  batch_size: 50
+  n_train_epoch: 100
+agent_params:
+  name: "NeuralBoltzmann9f"
+  context_features: [
+    'avg_purchase_price', 
+    'avg_purchase_discount', 
+    'avg_purchase_probability', 
+    'avg_purchase_quantity', 
+    'previous_transaction', 
+    'avg_redeemed_discount', 
+    'product_price', 
+    'marketing_feature', 
+    'observed_customer_product_feature'
+  ]
+  optimizer:
+    _target_: tensorflow.keras.optimizers.legacy.Adam
+    learning_rate: 0.02496721629015512
+  hidden_layers: [8, 2]
+  # add other parameters that tf-agents LinUCB agent supports
+  temperature: 0.16645228911819948
